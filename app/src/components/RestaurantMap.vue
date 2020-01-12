@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>{{id}}</h1>
+        <md-button><router-link :to="'/restaurant/'+id">Retour à la description</router-link></md-button>
         <gmap-map :center="center" :zoom="15" style="width:100%;height:500px;" >
             <gmap-marker :position="center"></gmap-marker>
         </gmap-map>
