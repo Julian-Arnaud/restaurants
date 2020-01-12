@@ -2,6 +2,12 @@
 <div>
   <h1>Detail du restaurant d'id = {{id}}</h1>
   <md-card>{{rNom}}</md-card><md-card>{{rCuisine}}</md-card><md-card>{{rQuartier}}</md-card>
+  <h3>Notes:</h3>
+  <ul>
+    <li v-for="n in rNotes" :key="n">
+      <md-card>Date: {{n.date}}&nbsp; Note: {{n.grade}}&nbsp; Score: {{n.score}}</md-card>
+    </li>
+  </ul>
   </div>
 </template>
 
@@ -21,13 +27,12 @@ export default {
       apiURL: "http://localhost:8080/api/restaurants",
       rNom: "",
       rCuisine: "",
-      rQuartier: ""
+      rQuartier: "",
+      rNotes: [],
+      nbNotes: 0
     };
   },
   mounted() {
-    console.log("AVANT AFFICHAGE !");
-    console.log("On va chercher les détails du restaurant id = " + this.$route.params.id)
-    console.log("ID = " + this.id);
     this.getDataFromServer();
   },
   methods: {
@@ -41,6 +46,11 @@ export default {
         this.rNom = resp["restaurant"]["name"];
         this.rCuisine = resp["restaurant"]["cuisine"];
         this.rQuartier = resp["restaurant"]["borough"];
+        this.nbNotes = resp["restaurant"]["grades"].length;
+        console.log(this.nbNotes);
+        for(var i = 0; i < this.nbNotes; ++i) {
+          this.rNotes.push({"date": resp["restaurant"]["grades"][i]["date"], "grade":resp["restaurant"]["grades"][i]["grade"], "score":resp["restaurant"]["grades"][i]["score"]});
+        }
       });
     },
     
