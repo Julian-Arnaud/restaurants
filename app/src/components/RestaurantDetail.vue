@@ -1,6 +1,7 @@
 <template>
 <div>
   <h1>Detail du restaurant d'id = {{id}}</h1>
+  <md-card>{{rNom}}</md-card><md-card>{{rCuisine}}</md-card><md-card>{{rQuartier}}</md-card>
   </div>
 </template>
 
@@ -17,18 +18,30 @@ export default {
   },
   data: function() {
     return {
-      
+      apiURL: "http://localhost:8080/api/restaurants",
+      rNom: "",
+      rCuisine: "",
+      rQuartier: ""
     };
   },
   mounted() {
     console.log("AVANT AFFICHAGE !");
     console.log("On va chercher les détails du restaurant id = " + this.$route.params.id)
     console.log("ID = " + this.id);
+    this.getDataFromServer();
   },
   methods: {
     getDataFromServer() {
       // ici on fait un fetch pour récupérer le détail du restaurant
-
+      // findRestaurantById();
+      fetch(this.apiURL + "/" + this.id).then(resp => {
+        return resp.json();
+      }).then(resp => {
+        console.log(resp);
+        this.rNom = resp["restaurant"]["name"];
+        this.rCuisine = resp["restaurant"]["cuisine"];
+        this.rQuartier = resp["restaurant"]["borough"];
+      });
     },
     
   }

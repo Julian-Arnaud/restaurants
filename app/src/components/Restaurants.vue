@@ -4,6 +4,12 @@
     Rechercher par nom:
     <input type="text" v-model="nomRecherche" v-on:input="getDataFromServer()" />
   </p>
+    <p>
+        Ajouter un restaurant:
+        <input type="text" v-model="nom" placeholder="Nouveau nom de restau"/>
+        <input type="text" v-model="cuisine" placeholder="Type de cuisine"/>
+        <button v-on:click="ajouterRestaurant()">Ajouter restaurant</button>
+    </p>
   <p>
     Nombre de restaurants par page :
     <input
@@ -36,10 +42,7 @@
         md-label="No users found"
         :md-description="`No user found for this '${nomRecherche}' query. Try a different search term or create a new user.`">
       </md-table-empty-state>
-
-            
-
-            <md-table-row slot="md-table-row" slot-scope="{ item }">
+            <md-table-row slot="md-table-row" slot-scope="{ item }" v-on:click="supprimerRestaurant(item.id)">
                 <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}</md-table-cell>
                 <md-table-cell md-label="Cuisine" md-sort-by="cuisine">{{ item.cuisine }}</md-table-cell>
                 <md-table-cell md-label="Details"><router-link :to="'restaurant/'+item._id">Details</router-link></md-table-cell>
@@ -99,9 +102,9 @@ export default {
     supprimerRestaurant(index) {
       this.restaurants.splice(index, 1);
     },
-    ajouterRestaurant(event) {
+    ajouterRestaurant() {
       // eviter le comportement par defaut
-      event.preventDefault();
+      //event.preventDefault();
 
       this.restaurants.push({
         nom: this.nom,
