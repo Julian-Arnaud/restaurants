@@ -1,13 +1,12 @@
 <template>
 <div>
-  <h1>Detail du restaurant d'id = {{id}}</h1>
-  <md-card>{{rNom}}</md-card><md-card>{{rCuisine}}</md-card><md-card>{{rQuartier}}</md-card>
+  <md-card>{{rNom}}</md-card><md-card>{{rCuisine}}</md-card><md-card>{{rAdresse}}</md-card>
   <h3>Notes:</h3>
-  <ul>
-    <li v-for="n in rNotes" :key="n">
+    <div v-for="n in rNotes" :key="n">
       <md-card>Date: {{n.date}}&nbsp; Note: {{n.grade}}&nbsp; Score: {{n.score}}</md-card>
-    </li>
-  </ul>
+    </div>
+
+  <md-button><router-link :to="'/map/' + id">Afficher sur la carte</router-link></md-button>
   </div>
 </template>
 
@@ -29,7 +28,8 @@ export default {
       rCuisine: "",
       rQuartier: "",
       rNotes: [],
-      nbNotes: 0
+      nbNotes: 0,
+      rAdresse: ""
     };
   },
   mounted() {
@@ -47,9 +47,13 @@ export default {
         this.rCuisine = resp["restaurant"]["cuisine"];
         this.rQuartier = resp["restaurant"]["borough"];
         this.nbNotes = resp["restaurant"]["grades"].length;
+        const shorty = resp["restaurant"]["address"];
+        this.rAdresse = shorty["building"] + " " + shorty["street"] + " " + shorty["zipcode"] + " " + this.rQuartier;
         console.log(this.nbNotes);
+        let tmp = [];
         for(var i = 0; i < this.nbNotes; ++i) {
-          this.rNotes.push({"date": resp["restaurant"]["grades"][i]["date"], "grade":resp["restaurant"]["grades"][i]["grade"], "score":resp["restaurant"]["grades"][i]["score"]});
+          tmp = resp["restaurant"]["grades"][i]["date"].split('T');
+          this.rNotes.push({"date": tmp[0], "grade":resp["restaurant"]["grades"][i]["grade"], "score":resp["restaurant"]["grades"][i]["score"]});
         }
       });
     },
