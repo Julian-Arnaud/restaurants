@@ -6,13 +6,21 @@
       <md-card>Date: {{n.date}}&nbsp; Note: {{n.grade}}&nbsp; Score: {{n.score}}</md-card>
     </div>
 
-  <md-button><router-link :to="'/map/' + id">Afficher sur la carte</router-link></md-button>
+  <md-button><router-link :to="'/map/' + id">Afficher sur la map</router-link></md-button>
+  <div id="carte">
+    <md-button v-on:click="inverseAfficher">Afficher menu & carte</md-button>
+    <div v-if="displayCarte">
+      <restaurant-carte></restaurant-carte>
+    </div>
+  </div>
   </div>
 </template>
 
 <script>
+import RestaurantCarte from "./RestaurantCarte";
 export default {
   name: "RestaurantDetail",
+  components: {RestaurantCarte},
   props: {},
   computed: { // computed data, permet de définir des data "calculées"
       id() {
@@ -29,7 +37,8 @@ export default {
       rQuartier: "",
       rNotes: [],
       nbNotes: 0,
-      rAdresse: ""
+      rAdresse: "",
+      displayCarte: false
     };
   },
   mounted() {
@@ -57,7 +66,9 @@ export default {
         }
       });
     },
-    
+    inverseAfficher() {
+      this.displayCarte = !this.displayCarte;
+    }
   }
 };
 </script>

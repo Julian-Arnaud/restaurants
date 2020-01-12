@@ -6,7 +6,7 @@ import 'vue-material/dist/theme/default.css'
 import VueRouter from 'vue-router'
 import Restaurants from "./components/Restaurants.vue";
 import RestaurantDetail from "./components/RestaurantDetail.vue";
-import RestaurantMap from "./components/RestaurantMap";
+import RestaurantMap from "./components/RestaurantMap.vue";
 import HelloWorld from "./components/HelloWorld.vue";
 import * as VueGoogleMaps from "vue2-google-maps";
 
