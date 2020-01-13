@@ -1,5 +1,7 @@
 <template>
 <div>
+    <img :src="imgUri" style="width: 80px; height: 80px"/>
+
   <md-card>{{rNom}}</md-card><md-card>{{rCuisine}}</md-card><md-card>{{rAdresse}}</md-card>
   <h3>Notes:</h3>
     <div v-for="n in rNotes" :key="n">
@@ -27,6 +29,9 @@ export default {
         // on y accèdera par {{id}} dans le template, et par this.id
         // dans le code
       return this.$route.params.id
+    },
+    imgUri() {
+        return require('@/assets/ace_restau/' + this.imguri + '.png');
     }
   },
   data: function() {
@@ -38,7 +43,8 @@ export default {
       rNotes: [],
       nbNotes: 0,
       rAdresse: "",
-      displayCarte: false
+      displayCarte: false,
+      imguri: 0
     };
   },
   mounted() {
@@ -64,6 +70,8 @@ export default {
           tmp = resp["restaurant"]["grades"][i]["date"].split('T');
           this.rNotes.push({"date": tmp[0], "grade":resp["restaurant"]["grades"][i]["grade"], "score":resp["restaurant"]["grades"][i]["score"]});
         }
+        this.imguri = Math.round(Math.random()*15);
+        console.log(this.imguri);
       });
     },
     inverseAfficher() {

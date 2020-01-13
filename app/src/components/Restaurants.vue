@@ -65,7 +65,8 @@ export default {
       pagesize: 10,
       nomRecherche: "",
       nbPagesDeResultats: 0,
-      apiURL: "http://localhost:8080/api/restaurants"
+      apiURL: "http://localhost:8080/api/restaurants",
+        customId: 0
     };
   },
   mounted() {
@@ -105,10 +106,11 @@ export default {
     ajouterRestaurant() {
       // eviter le comportement par defaut
       //event.preventDefault();
-
+        this.customId++;
       this.restaurants.push({
-        nom: this.nom,
-        cuisine: this.cuisine
+        name: this.nom,
+        cuisine: this.cuisine,
+          id: this.customId
       });
       this.nom = "";
       this.cuisine = "";

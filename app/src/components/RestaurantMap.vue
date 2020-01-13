@@ -23,7 +23,6 @@
             }
         },
         mounted() {
-            console.log("oui");
             this.getLatLon()
         },
         methods: {
