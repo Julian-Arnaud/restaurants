@@ -1,11 +1,11 @@
 <template>
 <div>
-    <img :src="imgUri" style="width: 80px; height: 80px"/>
+    <img :src="imgUri" style="width: 35%; height: 35%"/>
 
   <md-card>{{rNom}}</md-card><md-card>{{rCuisine}}</md-card><md-card>{{rAdresse}}</md-card>
   <h3>Notes:</h3>
     <div v-for="n in rNotes" :key="n">
-      <md-card>Date: {{n.date}}&nbsp; Note: {{n.grade}}&nbsp; Score: {{n.score}}</md-card>
+      <md-card>{{n.date}}&nbsp; Note: {{n.grade}}&nbsp; Score: {{n.score}}</md-card>
     </div>
 
   <md-button><router-link :to="'/map/' + id">Afficher sur la map</router-link></md-button>
@@ -31,7 +31,7 @@ export default {
       return this.$route.params.id
     },
     imgUri() {
-        return require('@/assets/ace_restau/' + this.imguri + '.png');
+        return require('@/assets/ace_restau/' + this.imguri + '.jpg');
     }
   },
   data: function() {

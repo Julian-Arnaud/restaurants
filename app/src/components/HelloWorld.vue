@@ -1,6 +1,7 @@
 <template>
   <div>
-   <h1>Ici page d'accueil ! {{msg}}</h1>
+   <h1>Mini projet M1 MIAGE {{msg}}</h1>
+   <h2>Par <a href=https://github.com/Julian-Arnaud>ARNAUD Julian</a> et <a href=https://github.com/BenoitMtr>MONTORSI Benoît</a></h2>
    <!--
    <div>
       <small>Flat</small>

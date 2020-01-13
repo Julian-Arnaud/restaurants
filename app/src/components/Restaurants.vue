@@ -26,11 +26,10 @@
   <button v-on:click="pagePrecedente()" v-bind:disabled="page==0">Précédent</button>
   <button v-on:click="pageSuivante()" :disabled="page == nbPagesDeResultats">Suivant</button>
  
-  <H1>TABLE VUE-MATERIAL</H1>
         <md-table v-model="restaurants" md-sort="name" md-sort-order="asc" md-card md-fixed-header>
             <md-table-toolbar>
                 <div class="md-toolbar-section-start">
-                    <h1 class="md-title">Nom cherche</h1>
+                    <h1 class="md-title">Recherche par nom</h1>
                 </div>
 
                 <md-field md-clearable class="md-toolbar-section-end">
