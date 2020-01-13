@@ -23,7 +23,11 @@ npm install
 ```
 npm run serve
 ```
-
+ou, si le port 8080 est déjà utilisé
+```
+npm run serve -- --port xxxx
+```
+avec xxxx le numéro du port à utiliser
 ## Accès à l'interface
 Dans un navigateur:
 ```
