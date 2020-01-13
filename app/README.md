@@ -1,24 +1,32 @@
-# projetbuffa
+# Mini projet Restaurants, par ARNAUD Julian et MONTORSI Benoît
 
-## Project setup
+## Setup: les données
+Pour avoir la base avec les restaurants, télécharger ce fichier: https://raw.githubusercontent.com/mongodb/docs-assets/primer-dataset/primer-dataset.json <br>
+Puis, après avoir MongoDB d'installé, effectuer cette commande pour insérer les données dans une collection "restaurants" d'une base "test" (par exemple)
+```
+mongoimport --db test --collection restaurants --drop --file primer-dataset.json
+```
+
+## Setup: les serveurs
+D'un terminal:
+```
+cd serveur
+```
+```
+node serverCrudWithMongo.js
+```
+
+D'un autre terminal:
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+## Accès à l'interface
+Dans un navigateur:
 ```
-npm run build
+localhost:n
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+avec n étant le port indiqué par le terminal ayant effectué npm run serve
